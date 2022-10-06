@@ -1,4 +1,8 @@
-.logout {
+.text-decorator-none{
+  text-decoration: none;
+}
+
+/* .logout {
     text-decoration: none;
     color: #fff;
-  }
+  } */

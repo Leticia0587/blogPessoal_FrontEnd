@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Box, Typography, Grid } from "@mui/material";
 import "./Navbar.css";
 
@@ -38,12 +39,14 @@ function Navbar() {
                 </Typography>
               </Box>
 
-              <Box mx={1} style={{cursor: "pointer"}}>
-                <Typography variant="h6" color="inherit">
-                  Logout
-                </Typography>
-              </Box>
-           </Box>
+              <Link to="/login" className="text-decorator-none">
+                <Box mx={1} style={{cursor: "pointer"}}>
+                  <Typography variant="h6" color="inherit">
+                    Logout
+                  </Typography>
+                </Box>
+              </Link>
+            </Box>
         </Toolbar>
       </AppBar>
     </>
