@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import InstagramIcon from '@material-ui/icons/Instagram';
-import FacebookIcon from '@material-ui/icons/Facebook';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import './Footer.css'
 import { useSelector } from 'react-redux';
@@ -14,10 +14,10 @@ function Footer() {
     (state) => state.tokens
   )
 
-  let footerContent
+  let footerComponent;
 
   if(token !== '') {
-    footerContent = <Grid
+    footerComponent = <Grid
     container
     direction="row"
     justifyContent="center"
@@ -42,21 +42,21 @@ function Footer() {
         </Box>
         <Box display="flex" alignItems="center" justifyContent="center">
           <a
-            href="https://www.facebook.com/generationbrasil"
+            href="https://github.com/Leticia0587"
             target="_blank"
             rel="noreferrer"
           >
-            <FacebookIcon className='redesSociais'/>
+            <GitHubIcon className='redesSociais'/>
           </a>
           <a
-            href="https://www.instagram.com/generationbrasil/"
+            href="https://www.instagram.com/leticia.araujo05/"
             target="_blank"
             rel="noreferrer"
           >
             <InstagramIcon className='redesSociais insta ' />
           </a>
           <a
-            href="https://www.linkedin.com/school/generationbrasil/"
+            href="https://www.linkedin.com/in/let%C3%ADcia-araujo-758583210/"
             target="_blank"
             rel="noreferrer"
           >
@@ -93,7 +93,7 @@ function Footer() {
 
   return (
     <>
-      {footerContent}
+      {footerComponent}
     </>
   );
 }
