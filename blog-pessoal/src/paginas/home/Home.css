@@ -1,17 +1,16 @@
-.caixa{
-    background-color: #3F51B5;
+.titulo {
+  font-size: 6rem;
+  color: #0000ff;
+  text-align: center;
 }
 
-.titulo{
-    color: white !important;
-    font-weight: bold !important;
-}
-.botao{
-    border-color: white !important;
-    background-color: #3F51B5;
-    color: white !important;
+.imagem {
+  width: 500px;
+  height: 500px;
+  display: block;
+  margin: 0 auto;
 }
 
-.postagens{
-    background-color: white;
+.fundo {
+  background-color: pink;
 }
