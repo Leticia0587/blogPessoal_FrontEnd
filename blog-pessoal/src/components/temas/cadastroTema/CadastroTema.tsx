@@ -79,7 +79,7 @@ function CadastroTema() {
       <Container maxWidth="sm">
         <form onSubmit={cadastrar}>
           <Typography variant="h3" component="h1">
-            Novo tema
+          Novo tema
           </Typography>
 
           <TextField

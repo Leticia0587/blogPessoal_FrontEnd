@@ -15,61 +15,55 @@ import { TokenState } from '../../../store/tokens/tokenReducer';
 
 function ListaPostagem() {
   let navigate = useNavigate();
-
-  const [postagens, setPostagens] = useState<Postagem[]>([]);
-
+  const [posts, setPosts] = useState<Postagem[]>([]);
   const token = useSelector<TokenState, TokenState['tokens']>(
     (state) => state.tokens
   );
 
-  const userId = useSelector<TokenState, TokenState['id']>((state) => state.id);
-
   useEffect(() => {
     if (token === '') {
-      alert('Ai não meu bom');
+      alert('Faça login primeiro');
       navigate('/login');
     }
   }, [token]);
 
   async function getPostagem() {
-    await busca('/postagens', setPostagens, {
+    await busca('/postagens', setPosts, {
       headers: { Authorization: token },
     });
   }
 
   useEffect(() => {
     getPostagem();
-  }, [postagens.length]);
+  }, [posts.length]);
 
   return (
     <>
-      {postagens.map((postagem) => (
-        <Box m={2} key={postagem.id}>
+      {posts.map((post) => (
+        <Box m={2} >
           <Card variant="outlined">
             <CardContent>
               <Typography color="textSecondary" gutterBottom>
                 Postagens
               </Typography>
               <Typography variant="h5" component="h2">
-                {postagem.titulo}
+                {post.titulo}
               </Typography>
               <Typography variant="body2" component="p">
-                {postagem.texto}
+                {post.texto}
               </Typography>
               <Typography variant="body2" component="p">
-                {postagem.tema?.descricao}
+                {post.tema?.descricao}
               </Typography>
               <Typography variant="body2" component="p">
-                Postado por: {postagem.usuario?.nome}
+                Postado por: {post.usuario?.nome}
               </Typography>
             </CardContent>
             <CardActions>
-              {postagem.usuario?.id === +userId ? (
                 <Box display="flex" justifyContent="center" mb={1.5}>
-                  <Link
-                    to={`/editarPost/${postagem.id}`}
-                    className="text-decoration-none"
-                  >
+                <Link
+                  to={`/formularioPostagem/${post.id}`}
+                  className="text-decorator-none">
                     <Box mx={1}>
                       <Button variant="contained" size="small" color="primary">
                         atualizar
@@ -77,9 +71,8 @@ function ListaPostagem() {
                     </Box>
                   </Link>
                   <Link
-                    to={`/apagarPost/${postagem.id}`}
-                    className="text-decoration-none"
-                  >
+                  to={`/deletarPostagem/${post.id}`}
+                  className="text-decorator-none">
                     <Box mx={1}>
                       <Button
                         variant="contained"
@@ -91,9 +84,6 @@ function ListaPostagem() {
                     </Box>
                   </Link>
                 </Box>
-              ) : (
-                <></>
-              )}
             </CardActions>
           </Card>
         </Box>

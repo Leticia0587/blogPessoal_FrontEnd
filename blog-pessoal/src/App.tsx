@@ -27,21 +27,19 @@ function App() {
 
       <div style={{minHeight: '80vh'}}>
         <Routes>
-          <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/cadastro" element={<CadastroUsuario />} />
-
           <Route path="/home" element={<Home />} />
           <Route path="/perfil" element={<Perfil />} />
-
+          <Route path="/cadastrar" element={<CadastroUsuario />} />
           <Route path="/temas" element={<ListaTemas />} />
-          <Route path="/cadastroTema" element={<CadastroTema />} />
-          <Route path="/atualizarTema/:id" element={<CadastroTema />} />
-          <Route path="/apagarTema/:id" element={<DeletarTema />} />
-
           <Route path="/posts" element={<ListaPostagem />} />
-          <Route path="/editarPost/:id" element={<CadastroPostagem />} />
-          <Route path="/apagarPost/:id" element={<DeletarPostagem />} />
+          <Route path="/formularioPostagem" element={<CadastroPostagem />} />
+          <Route path="/formularioPostagem/:id" element={<CadastroPostagem />} />
+          <Route path="/formularioTema" element={<CadastroTema />} />
+          <Route path="/formularioTema/:id" element={<CadastroTema />} />
+          <Route path="/deletarPostagem/:id" element={<DeletarPostagem />} />
+          <Route path="/deletarTema/:id" element={<DeletarTema />} />
         </Routes>
       </div>
       

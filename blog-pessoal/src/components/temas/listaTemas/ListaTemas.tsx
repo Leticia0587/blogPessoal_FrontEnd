@@ -10,7 +10,6 @@ import {
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
 import Tema from '../../../model/Tema';
 import { busca } from '../../../services/Service';
 import { TokenState } from '../../../store/tokens/tokenReducer';
@@ -57,7 +56,7 @@ function ListaTemas() {
               <CardActions>
                 <Box display="flex" justifyContent="center" mb={1.5}>
                   <Link
-                    to={`/atualizarTema/${tema.id}`}
+                    to={`/formularioTema/${tema.id}`}
                     className="text-decorator-none"
                   >
                     <Box mx={1}>
@@ -71,7 +70,7 @@ function ListaTemas() {
                       </Button>
                     </Box>
                   </Link>
-                  <Link to={`/apagarTema/${tema.id}`} className="text-decorator-none">
+                  <Link to={`/deletarTema/${tema.id}`} className="text-decorator-none">
                     <Box mx={1}>
                       <Button
                         variant="contained"

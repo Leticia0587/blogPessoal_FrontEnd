@@ -17,6 +17,7 @@ import Tema from '../../../model/Tema';
 import Usuario from '../../../model/Usuario';
 import { busca, buscaId, post, put } from '../../../services/Service';
 import { TokenState } from '../../../store/tokens/tokenReducer';
+import "./CadastroPostagem.css";
 
 function CadastroPostagem() {
   let navigate = useNavigate();
@@ -169,7 +170,7 @@ function CadastroPostagem() {
               labelId="demo-simple-select-helper-label"
               id="demo-simple-select-helper"
               onChange={(e) =>
-                buscaId(`/temas/${e.target.value}`, setTema, {
+                buscaId(`/tema/${e.target.value}`, setTema, {
                   headers: {
                     Authorization: token,
                   },

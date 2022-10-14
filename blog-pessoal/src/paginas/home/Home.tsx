@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography, IconButton } from '@mui/material';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,6 @@ import ModalPostagem from '../../components/postagens/modalPostagem/ModalPostage
 import TabPostagens from '../../components/postagens/tabPostagens/TabPostagens';
 import { TokenState } from '../../store/tokens/tokenReducer';
 import './Home.css';
-
 
 function Home() {
 
@@ -29,13 +28,13 @@ function Home() {
         <Grid alignItems="center" item xs={6}>
           <Box paddingX={20} >
             <Typography variant="h3" gutterBottom color="textPrimary" component="h3" align="center" style={{ color: "white", fontWeight: "bold" }}>Seja bem vindo(a)!</Typography>
-            <Typography variant="h5" gutterBottom color="textPrimary" component="h5" align="center" style={{ color: "white", fontWeight: "bold" }}>expresse aqui os seus pensamentos e opiniões!</Typography>
+            <Typography variant="h5" gutterBottom color="textPrimary" component="h5" align="center" style={{ color: "white", fontWeight: "bold" }}>Expresse aqui os seus pensamentos e opiniões!</Typography>
           </Box>
           <Box display="flex" justifyContent="center">
             <Box marginRight={1}>
               <ModalPostagem />
             </Box>
-            <Button variant="outlined" style={{ borderColor: "white", backgroundColor: "#3F51B5", color: "white" }}>Ver Postagens</Button>
+            <Button variant="outlined" style={{ borderColor: "white", backgroundColor: "#3F51B5", color: "white" }}>Ver Postagens </Button>
           </Box>
 
         </Grid>

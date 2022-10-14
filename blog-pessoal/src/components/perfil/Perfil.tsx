@@ -45,7 +45,7 @@ function Perfil() {
           </Grid>
           <Grid xs={9} justifyContent='center' className='perfil'>
             <Typography variant='h4' align='center'>Postagens de {usuario.nome}</Typography>
-            Você tem um total de {usuario.postagem?.length} postagens feitas
+            Você tem um total de: {usuario.postagem?.length} postagens feitas
 
             {usuario.postagem?.map((post) => (
               <p>{post.titulo}</p>
