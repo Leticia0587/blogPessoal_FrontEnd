@@ -8,24 +8,31 @@ import { toast } from 'react-toastify';
 import './Navbar.css';
 
 function Navbar() {
-
-  let history = useNavigate()
-  let dispatch = useDispatch()
   const token = useSelector<TokenState, TokenState["tokens"]>(
-    (state) => state.tokens
-  )
+      (state) => state.tokens
+    );
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    function goLogout() {
-        dispatch(addToken(''))
-        
-        alert("Usuário deslogado")
-        history("/login")
-    }
+  function goLogout() {
+      dispatch(addToken(''));
+      toast.info('usuário deslogado',{
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          theme: "colored",
+          progress: undefined,
+      });
+      navigate('/login')
+  }
 
-    let navBarComponent
+  var navbarComponent;
 
     if(token !== '') {
-      navBarComponent = <AppBar position="static">
+      navbarComponent = <AppBar position="static">
       <Toolbar variant="dense">
         <Box className="cursor">
           <Typography variant="h5" color="inherit">
@@ -87,11 +94,10 @@ function Navbar() {
       </Toolbar>
     </AppBar>
     }
-
     
   return (
     <>
-      {navBarComponent}
+      {navbarComponent}
     </>
   );
 }

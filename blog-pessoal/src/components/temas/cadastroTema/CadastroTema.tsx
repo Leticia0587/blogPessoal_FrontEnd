@@ -7,108 +7,113 @@ import useLocalStorage from 'react-use-localstorage';
 import Tema from '../../../model/Tema';
 import { buscaId, post, put } from '../../../services/Service';
 import { TokenState } from '../../../store/tokens/tokenReducer';
+import { toast } from 'react-toastify';
 
 function CadastroTema() {
   let navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
-  const token = useSelector<TokenState, TokenState["tokens"]>(
-    (state) => state.tokens
-  )
-
+  const { id } = useParams<{id: string}>();
+  const [token, setToken] = useLocalStorage('token');
   const [tema, setTema] = useState<Tema>({
-    id: 0,
-    descricao: '',
-  });
+      id: 0,
+      descricao: ''
+  })
 
   useEffect(() => {
-    if (token === '') {
-      alert('Faça login primeiro');
-      navigate('/login');
-    }
-  }, [token]);
-
-  async function temaById(id: string) {
-    await buscaId(`/tema/${id}`, setTema, {
-      headers: { Authorization: token },
-    });
-  }
-
-  useEffect(() => {
-    if (id !== undefined) {
-      temaById(id);
-    }
-  }, [id]);
-
-  function updatedModel(event: ChangeEvent<HTMLInputElement>) {
-    setTema({
-      ...tema,
-      [event.target.name]: event.target.value,
-    });
-  }
-
-  async function cadastrar(event: ChangeEvent<HTMLFormElement>) {
-    event.preventDefault()
-
-    if(id !== undefined) {
-      try {
-        await put('/tema', tema, setTema, {
-          headers: {'Authorization': token}
-        })
-        alert('Tema atualizado com sucesso')
-        navigate('/temas')
-      } catch (error) {
-        alert('Falha ao atualizar o tema, reveja o nome, por favor')
+      if (token == "") {
+          toast.error('Você precisa estar logado!',{
+              position: 'top-right',
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: false,
+              theme: "colored",
+              progress: undefined,
+          });
+          navigate("/login")
+  
       }
-    } else {
-      try {
-        await post('/tema', tema, setTema, {
-          headers: {'Authorization': token}
-        })
-        alert('Tema cadastrado com sucesso')
-        navigate('/temas')
-      } catch (error) {
-        alert('Falha ao criar o novo tema, por favor, verifique o nome.')
+  }, [token])
+
+  useEffect(() =>{
+      if(id !== undefined){
+          findById(id)
       }
-    }
-  }
+  }, [id])
 
+  async function findById(id: string) {
+      buscaId(`/temas/${id}`, setTema, {
+          headers: {
+            'Authorization': token
+          }
+        })
+      }
 
+      function updatedTema(e: ChangeEvent<HTMLInputElement>) {
+
+          setTema({
+              ...tema,
+              [e.target.name]: e.target.value,
+          })
+  
+      }
+      
+      async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
+          e.preventDefault()
+          console.log("tema " + JSON.stringify(tema))
+  
+          if (id !== undefined) {
+              console.log(tema)
+              put(`/temas`, tema, setTema, {
+                  headers: {
+                      'Authorization': token
+                  }
+              })
+              toast.success('Tema atualizado com sucesso!',{
+                  position: 'top-right',
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: false,
+                  theme: "colored",
+                  progress: undefined,
+              });
+          } else {
+              post(`/temas`, tema, setTema, {
+                  headers: {
+                      'Authorization': token
+                  }
+              })
+              toast.success('Tema cadastrado com sucesso!',{
+                  position: 'top-right',
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: false,
+                  theme: "colored",
+                  progress: undefined,
+              });
+          }
+          back()
+  
+      }
+  
+      function back() {
+          navigate('/temas')
+      }
 
   return (
-    <>
-      <Container maxWidth="sm">
-        <form onSubmit={cadastrar}>
-          <Typography variant="h3" component="h1">
-          Novo tema
-          </Typography>
-
-          <TextField
-            label="Nome do tema"
-            value={tema.descricao}
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              updatedModel(event)
-            }
-            id="descricao"
-            name="descricao"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-          />
-
-          <Box display="flex" justifyContent="space-around">
-            <Link to="/home">
-              <Button variant="contained" color="secondary">
-                Cancelar
-              </Button>
-            </Link>
-            <Button type="submit" variant="contained" color="primary">
-              Cadastrar
-            </Button>
-          </Box>
-        </form>
-      </Container>
-    </>
-  );
-}
-
+    <Container maxWidth="sm" className="topo">
+            <form onSubmit={onSubmit}>
+                <Typography variant="h3" color="textSecondary" component="h1" align="center" >Theme registration form</Typography>
+                <TextField value={tema.descricao} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedTema(e)} id="descricao" label="description" variant="outlined" name="descricao" margin="normal" fullWidth />
+                <Button type="submit" variant="contained" className='btnAtualizar'>
+                finish
+                </Button>
+            </form>
+        </Container>
+      )
+    }
 export default CadastroTema;
